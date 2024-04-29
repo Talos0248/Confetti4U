@@ -9,7 +9,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
     },
-]);
+],{basename: "/Confetti4U/"});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
