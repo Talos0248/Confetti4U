@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./confetti-4-u
+        working-directory: confetti-4-u
 
     steps:
       - name: Checkout repo
