@@ -1,0 +1,42 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    width: 100vw;
+    background-color: #f6f6f6;
+}
+
+.logo-and-description, .description, .nav-icons {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+.nav-icons {
+    user-select: none;
+}
+
+.navbar .icon {
+    width: 36px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.dark .navbar {
+        background-color: #363A3E;
+        color: #eeeeee;
+}
+
+@media screen and (max-width: 600px) {
+    .description {
+        display: none;
+    }
+}
