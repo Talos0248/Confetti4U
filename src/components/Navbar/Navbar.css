@@ -5,12 +5,18 @@ ul {
 }
 
 .navbar {
+    width: 100vw;
+    background-color: #f6f6f6;
+    color: #363A3E;
+}
+
+.content {
+    margin: auto;
+    max-width: 1920px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5em 1em;
-    width: 100vw;
-    background-color: #f6f6f6;
 }
 
 .logo-and-description, .description, .nav-icons {

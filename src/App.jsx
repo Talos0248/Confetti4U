@@ -1,11 +1,8 @@
 import React from 'react'
 import './App.css'
 import Navbar from "./components/Navbar/Navbar.jsx"
+import Form from "./components/Form/Form.jsx"
 
-// Import styles of packages that you've installed.
-// All packages except `@mantine/hooks` require styles imports
-import '@mantine/core/styles.css';
-import {MantineProvider} from '@mantine/core';
 
 
 function App() {
@@ -14,11 +11,10 @@ function App() {
 
 
     return (
-        <MantineProvider>
-            <div className={`background + ${isDark? " dark" : ""}`}>
+            <div className={`background${+ isDark? " dark" : ""}`}>
                 <Navbar isDark = {isDark} setIsDark = {setIsDark} />
+                <Form className = "form"/>
             </div>
-        </MantineProvider>
     )
 }
 

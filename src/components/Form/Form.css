@@ -1,0 +1,19 @@
+.form {
+    background-color: #f6f6f6;
+    width: 30%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 2em;
+    border-radius: 1.5em;
+}
+
+.dark .form {
+    background-color: #363A3E;
+}
+
+.from-and-to{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-bottom: 1em;
+}

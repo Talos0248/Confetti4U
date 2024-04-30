@@ -1,8 +1,12 @@
 .background {
-    background-color: #f6f6f6;
+    background-color: #ffffff;
+    min-height: 100vh;
 }
 
 .dark.background {
     background-color: #272727;
-    min-height: 100vh;
+}
+
+.form {
+    margin: 40px;
 }
