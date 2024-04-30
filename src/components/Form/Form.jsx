@@ -3,7 +3,7 @@ import FormField from "../FormField/FormField.jsx";
 
 import "./Form.css";
 
-export default function Form(props) {
+export default function Form() {
 
     const [formData, setFormData] = React.useState(
         {
