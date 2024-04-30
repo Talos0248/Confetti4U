@@ -17,3 +17,32 @@
     gap: 1em;
     margin-bottom: 1em;
 }
+
+.confettify {
+    background: linear-gradient(45deg, #FF9A61, #FF6F61, #FF61B2, #FF61FF, #61B2FF, #61E3FF, #61FFD9, #61FF61, #ffc205, #FF9A61);
+    padding: 0.5em 1em;
+    border-radius: 1em;
+    border: none;
+    color: white;
+    font-family: Outfit, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow: 0 0 1em black;
+    cursor: pointer;
+    user-select: none;
+    display: block;
+    margin: auto;
+}
+
+.confettify:hover {
+    filter: brightness(1.1);
+}
+
+.confettify:active {
+    filter: brightness(0.8);
+}
+
+.dark .confettify {
+    background: #363A3E;
+    border: 3px solid white;
+}

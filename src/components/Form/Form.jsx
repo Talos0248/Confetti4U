@@ -1,9 +1,10 @@
 import React from "react";
 import FormField from "../FormField/FormField.jsx";
+import {colorStrings} from "../../utils/colorStrings.jsx";
 
 import "./Form.css";
 
-export default function Form() {
+export default function Form({isDark}) {
 
     const [formData, setFormData] = React.useState(
         {
@@ -54,7 +55,7 @@ export default function Form() {
                         {value: "bell", label: "Bell"},
                     ]}/>
                     <FormField name="textContent" label="Text Content:" type="textarea" handleChange={handleChange} value={formData.textContent}/>
-                    <button type="submit">Confettify!</button>
+                    <button type="submit" className="confettify"><span className="confettify-text">{isDark? colorStrings("Confettify!", isDark) : "Confettify!"}</span></button>
                 </form>
             </div>
         )

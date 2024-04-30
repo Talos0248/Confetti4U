@@ -13,7 +13,7 @@ function App() {
     return (
             <div className={`background${+ isDark? " dark" : ""}`}>
                 <Navbar isDark = {isDark} setIsDark = {setIsDark} />
-                <Form className = "form"/>
+                <Form className = "form" isDark = {isDark}/>
             </div>
     )
 }
