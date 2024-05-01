@@ -7,6 +7,14 @@
     border-radius: 1.5em;
 }
 
+.form {
+    padding: 1em 2em;
+}
+
+.form-field {
+    padding: 0.2em 0;
+}
+
 .dark .form {
     background-color: #363A3E;
 }
@@ -15,13 +23,12 @@
     display: flex;
     justify-content: space-between;
     gap: 1em;
-    margin-bottom: 1em;
 }
 
 .confettify {
     background: linear-gradient(45deg, #FF9A61, #FF6F61, #FF61B2, #FF61FF, #61B2FF, #61E3FF, #61FFD9, #61FF61, #ffc205, #FF9A61);
     padding: 0.5em 1em;
-    border-radius: 1em;
+    border-radius: 3em;
     border: none;
     color: white;
     font-family: Outfit, sans-serif;
@@ -36,6 +43,7 @@
 
 .confettify:hover {
     filter: brightness(1.1);
+    border: 3px solid #c0c0c0;
 }
 
 .confettify:active {
@@ -44,5 +52,5 @@
 
 .dark .confettify {
     background: #363A3E;
-    border: 3px solid white;
+    border: 3px solid #8d8d8d;
 }

@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import {colorStrings} from "../../utils/colorStrings";
+import {colorStrings} from "../../utils/colorStrings.jsx";
 import {DarkModeSwitch} from 'react-toggle-dark-mode';
 
 export default function Navbar(props) {

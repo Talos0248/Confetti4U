@@ -50,6 +50,8 @@ export default function FormField({
                 value={value}
                 id={`${id}-${name}`}
                 className="textarea"
+                placeholder={placeholder}
+                rows={5}
             />;
             break;
         default:
@@ -58,11 +60,11 @@ export default function FormField({
 
     return (
         <div className="form-field">
-            <div className="label-and-actionbutton">
+            <div className="label-and-action-button">
                 <label className="label" htmlFor={`${id}-${name}`}>{label}</label>
                 {actionButtonImage && (
-                    <button onClick={actionButtonHandler}>
-                        <img src={actionButtonImage} alt={actionButtonImageAlt}/>
+                    <button onClick={actionButtonHandler} className="action-button">
+                        <img src={actionButtonImage} alt={actionButtonImageAlt} className="action-button-image"/>
                     </button>
                 )}
             </div>

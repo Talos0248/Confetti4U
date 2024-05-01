@@ -1,6 +1,7 @@
 import React from "react";
 import FormField from "../FormField/FormField.jsx";
 import {colorStrings} from "../../utils/colorStrings.jsx";
+import Confetti from 'react-confetti'
 
 import "./Form.css";
 
@@ -12,7 +13,8 @@ export default function Form({isDark}) {
             to: "",
             confettiType: "",
             soundEffect: "",
-            textContent: "",
+            mainText: "",
+            additionalText: "",
         }
     )
 
@@ -31,32 +33,60 @@ export default function Form({isDark}) {
         console.log(formData)
     }
 
-        return (
-            <div className="form">
-                <form onSubmit={handleSubmit}>
-                    <div className="from-and-to">
-                        <FormField name="from" label="From:" type="text" handleChange={handleChange} value={formData.from} placeholder="Me"/>
-                        <FormField name="to" label="To:" type="text" handleChange={handleChange} placeholder="You"/>
-                    </div>
-                    <FormField name="confettiType" label="Confetti Type:" type="dropdown" handleChange={handleChange} value={formData.confettiType}
-                               options={[
-                        {value: "None", label: "None"},
-                        {value: "confetti", label: "Confetti"},
-                        {value: "hearts", label: "Hearts"},
-                        {value: "stars", label: "Stars"},
-                        {value: "bubbles", label: "Bubbles"},
-                    ]}/>
-                    <FormField name="soundEffect" label="Sound Effect:" type="dropdown" handleChange={handleChange} value={formData.soundEffect}
-                               options={[
-                        {value: "None", label: "None"},
-                        {value: "kids-cheering", label: "Kids Cheering"},
-                        {value: "applause", label: "Applause"},
-                        {value: "cheering", label: "Cheering"},
-                        {value: "bell", label: "Bell"},
-                    ]}/>
-                    <FormField name="textContent" label="Text Content:" type="textarea" handleChange={handleChange} value={formData.textContent}/>
-                    <button type="submit" className="confettify"><span className="confettify-text">{isDark? colorStrings("Confettify!", isDark) : "Confettify!"}</span></button>
-                </form>
-            </div>
-        )
+    const [confettiTypes, setConfettiTypes] = React.useState({regular: 0, snow: 0, stars: 0})
+
+    function toggleConfettiType(type) {
+        for (let key in confettiTypes) {
+            confettiTypes[key] = key === type ? 1 : 0;
+        }
+    }
+
+    return (
+        <div className="form">
+            <form onSubmit={handleSubmit}>
+                <div className="from-and-to">
+                    <FormField name="from" label="From:" type="text" handleChange={handleChange} value={formData.from}
+                               placeholder="Me"/>
+                    <FormField name="to" label="To:" type="text" handleChange={handleChange} placeholder="You"/>
+                </div>
+                <FormField name="mainText" label="Main Text:" type="text" handleChange={handleChange}
+                           placeholder="Happy Birthday!" value={formData.mainText}/>
+                <FormField name="additionalText" label="Text Content:" type="textarea" handleChange={handleChange}
+                           placeholder="Enter your message here!" value={formData.additionalText}/>
+
+                <FormField name="confettiType" label="Confetti Type:" type="dropdown" handleChange={handleChange}
+                           value={formData.confettiType}
+                           actionButtonImage={isDark ? "eye-dark.png" : "eye-light.png"}
+                           actionButtonImageAlt="Play Sound"
+                           options={[
+                               {value: "None", label: "None"},
+                               {value: "confetti", label: "Confetti"},
+                               {value: "hearts", label: "Hearts"},
+                               {value: "stars", label: "Stars"},
+                               {value: "snowflakes", label: "Snowflakes"},
+                           ]}/>
+                <FormField name="soundEffect" label="Sound Effect:" type="dropdown" handleChange={handleChange}
+                           value={formData.soundEffect}
+                           actionButtonImage={isDark ? "sound-dark.png" : "sound-light.png"}
+                           actionButtonImageAlt="Play Sound"
+                           options={[
+                               {value: "None", label: "None"},
+                               {value: "kids-cheering", label: "Kids Cheering"},
+                               {value: "applause", label: "Applause"},
+                               {value: "cheering", label: "Cheering"},
+                               {value: "bell", label: "Bell"},
+                           ]}/>
+                <button type="submit" className="confettify"><span
+                    className="confettify-text">{isDark ? colorStrings("Confettify!", isDark) : "Confettify!"}</span>
+                </button>
+
+                {/*Normal Confetti*/}
+                <Confetti run={false}/>
+
+                {/*Snow Confetti*/}
+
+
+            </form>
+        </div>
+    )
 }
