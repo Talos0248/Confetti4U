@@ -18,6 +18,13 @@ export default function Form({isDark}) {
         }
     )
 
+    const [playSound, setPlaySound] = React.useState(false)
+    const [playConfetti, setPlayConfetti] = React.useState(false)
+
+    function togglePlayConfetti() {
+        setPlayConfetti(!playConfetti)
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -31,14 +38,6 @@ export default function Form({isDark}) {
             }
         })
         console.log(formData)
-    }
-
-    const [confettiTypes, setConfettiTypes] = React.useState({regular: 0, snow: 0, stars: 0})
-
-    function toggleConfettiType(type) {
-        for (let key in confettiTypes) {
-            confettiTypes[key] = key === type ? 1 : 0;
-        }
     }
 
     return (
@@ -56,15 +55,18 @@ export default function Form({isDark}) {
 
                 <FormField name="confettiType" label="Confetti Type:" type="dropdown" handleChange={handleChange}
                            value={formData.confettiType}
-                           actionButtonImage={isDark ? "eye-dark.png" : "eye-light.png"}
-                           actionButtonImageAlt="Play Sound"
                            options={[
                                {value: "None", label: "None"},
                                {value: "confetti", label: "Confetti"},
                                {value: "hearts", label: "Hearts"},
                                {value: "stars", label: "Stars"},
                                {value: "snowflakes", label: "Snowflakes"},
-                           ]}/>
+                           ]}
+                           actionButtonImage={ playConfetti ? (isDark ? "eye-off-dark.svg" : "eye-off-light.svg") :
+                               (isDark ? "eye-dark.png" : "eye-light.png")}
+                           actionButtonImageAlt="Play Sound"
+                           actionButtonHandler={togglePlayConfetti}
+                />
                 <FormField name="soundEffect" label="Sound Effect:" type="dropdown" handleChange={handleChange}
                            value={formData.soundEffect}
                            actionButtonImage={isDark ? "sound-dark.png" : "sound-light.png"}
@@ -81,7 +83,7 @@ export default function Form({isDark}) {
                 </button>
 
                 {/*Normal Confetti*/}
-                <Confetti run={false}/>
+                {playConfetti && formData.confettiType === "confetti" && <Confetti/>}
 
                 {/*Snow Confetti*/}
 
