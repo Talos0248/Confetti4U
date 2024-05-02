@@ -62,10 +62,7 @@ export default function Form({isDark}) {
                                {value: "stars", label: "Stars"},
                                {value: "snowflakes", label: "Snowflakes"},
                            ]}
-                           actionButtonImage={ playConfetti ? (isDark ? "eye-off-dark.svg" : "eye-off-light.svg") :
-                               (isDark ? "eye-dark.png" : "eye-light.png")}
-                           actionButtonImageAlt="Play Sound"
-                           actionButtonHandler={togglePlayConfetti}
+                           toggleSwitch={true} toggleChecked={playConfetti} toggleHandler={togglePlayConfetti}
                 />
                 <FormField name="soundEffect" label="Sound Effect:" type="dropdown" handleChange={handleChange}
                            value={formData.soundEffect}
