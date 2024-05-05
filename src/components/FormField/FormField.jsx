@@ -17,8 +17,6 @@ export default function FormField({
                                       toggleSwitch, // A boolean indicating whether a toggle should be shown
                                       toggleChecked, // A boolean indicating whether the toggle is checked
                                       toggleHandler, // Function to handle toggle switch action
-    toggleCheckedIcon,
-    toggleUncheckedIcon
                                   }) {
     const id = React.useId();
 
@@ -69,7 +67,10 @@ export default function FormField({
             <img src={actionButtonImage} alt={actionButtonImageAlt} className="action-button-image"/>
         </button>
     ) : toggleSwitch ? (
-        <Switch onChange={toggleHandler} checked={toggleChecked} checkedIcon={toggleCheckedIcon} uncheckedIcon={toggleUncheckedIcon}/>
+        <label>
+            <Switch onChange={toggleHandler} checked={toggleChecked} onColor={"#42ccaa"} offColor={"#FF6F61"}
+                    height={15} width={30} handleDiameter={17}/>
+        </label>
     ) : null;
 
     return (

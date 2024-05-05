@@ -1,7 +1,14 @@
 import React from "react";
 import FormField from "../FormField/FormField.jsx";
 import {colorStrings} from "../../utils/colorStrings.jsx";
-import Confetti from 'react-confetti'
+import {RegularConfetti, SnowConfetti, HeartConfetti} from "../Confetti/Confetti.jsx";
+import {
+    onSnapshot,
+    addDoc,
+    doc,
+    deleteDoc,
+    setDoc
+} from "firebase/firestore"
 
 import "./Form.css";
 
@@ -80,9 +87,15 @@ export default function Form({isDark}) {
                 </button>
 
                 {/*Normal Confetti*/}
-                {playConfetti && formData.confettiType === "confetti" && <Confetti/>}
+                {playConfetti && formData.confettiType === "confetti" && <RegularConfetti isDark={isDark}/>}
 
                 {/*Snow Confetti*/}
+                {playConfetti && formData.confettiType === "snowflakes" && <SnowConfetti isDark={isDark}/>}
+
+                {/*Heart Confetti*/}
+                {playConfetti && formData.confettiType === "hearts" && <HeartConfetti isDark={isDark}/>}
+
+                {/*Star Confetti*/}
 
 
             </form>
