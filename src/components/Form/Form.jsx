@@ -1,7 +1,7 @@
 import React from "react";
 import FormField from "../FormField/FormField.jsx";
 import {colorStrings} from "../../utils/colorStrings.jsx";
-import {RegularConfetti, SnowConfetti, HeartConfetti} from "../Confetti/Confetti.jsx";
+import {RegularConfetti, SnowConfetti, HeartConfetti, StarConfetti} from "../Confetti/Confetti.jsx";
 import {
     onSnapshot,
     addDoc,
@@ -96,7 +96,7 @@ export default function Form({isDark}) {
                 {playConfetti && formData.confettiType === "hearts" && <HeartConfetti isDark={isDark}/>}
 
                 {/*Star Confetti*/}
-
+                {playConfetti && formData.confettiType === "stars" && <StarConfetti isDark={isDark}/>}
 
             </form>
         </div>

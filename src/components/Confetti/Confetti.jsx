@@ -6,7 +6,9 @@ import {
     darkSnowColors,
     lightSnowColors,
     darkHeartColors,
-    lightHeartColors
+    lightHeartColors,
+    darkStarColors,
+    lightStarColors
 } from "../../utils/colorStrings.jsx";
 import {randomInt} from "react-confetti/src/utils";
 
@@ -66,6 +68,69 @@ export function SnowConfetti({isDark}) {
     }}/>
 }
 
+
+// HEART CONFETTI
 export function HeartConfetti({isDark}) {
-    return <CustomConfetti isDark={isDark} darkColors={darkHeartColors} lightColors={lightHeartColors}/>
+    return <CustomConfetti isDark={isDark} darkColors={darkHeartColors} lightColors={lightHeartColors} drawShape={
+        ctx => {
+            const size = 13; // Default size of the hearts
+            ctx.beginPath();
+            const topCurveHeight = size * 0.3;
+            ctx.moveTo(0, topCurveHeight);
+            // Top left curve
+            ctx.bezierCurveTo(
+                0, 0,
+                -size / 2, 0,
+                -size / 2, topCurveHeight
+            );
+
+            // Bottom left curve
+            ctx.bezierCurveTo(
+                -size / 2, size * 0.75,
+                0, size * 0.75,
+                0, size
+            );
+
+            // Bottom right curve
+            ctx.bezierCurveTo(
+                0, size * 0.75,
+                size / 2, size * 0.75,
+                size / 2, topCurveHeight
+            );
+
+            // Top right curve
+            ctx.bezierCurveTo(
+                size / 2, 0,
+                0, 0,
+                0, topCurveHeight
+            );
+
+            ctx.fill();
+        }
+    } gravity={0.03}
+    />
+}
+
+// STAR CONFETTI
+function drawStar(ctx) {
+    const numPoints = this.numPoints || randomInt(4, 6)
+    this.numPoints = numPoints
+    const outerRadius = this.w/2
+    const innerRadius = outerRadius / 2
+    ctx.beginPath()
+    ctx.moveTo(0, 0 - outerRadius)
+
+    for (let n = 1; n < numPoints * 2; n++) {
+        const radius = n % 2 === 0 ? outerRadius : innerRadius
+        const x = radius * Math.sin((n * Math.PI) / numPoints)
+        const y = -1 * radius * Math.cos((n * Math.PI) / numPoints)
+        ctx.lineTo(x, y)
+    }
+    ctx.fill()
+    ctx.closePath()
+}
+
+export function StarConfetti({isDark}) {
+    return <CustomConfetti isDark={isDark} darkColors={darkStarColors} lightColors={lightStarColors}
+                           drawShape={drawStar} gravity={0.01}/>
 }
