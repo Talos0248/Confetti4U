@@ -61,3 +61,11 @@
 .action-button-image {
     width: 90%;
 }
+
+.toggle-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    font-size: 0.8em;
+    align-items: center;
+}

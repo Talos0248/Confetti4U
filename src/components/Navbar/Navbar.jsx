@@ -25,12 +25,12 @@ export default function Navbar(props) {
                     </li>
                     <li>
                         <a href="https://github.com/Talos0248/Confetti4U" target="_blank">
-                            <img className="icon" src={props.isDark? "github-dark.svg" : "github-light.svg"} alt=""/>
+                            <img className="icon" src={props.isDark? "img/github-dark.svg" : "img/github-light.svg"} alt=""/>
                         </a>
                     </li>
                     <li>
                         <a href="https://ko-fi.com/talos0248" target="_blank">
-                            <img className="icon" src={"ko-fi.svg"} alt="Support the dev through Ko-fi!"/>
+                            <img className="icon" src={"img/ko-fi.svg"} alt="Support the dev through Ko-fi!"/>
                         </a>
                     </li>
                 </ul>

@@ -13,7 +13,10 @@ function App() {
     return (
             <div className={`background${+ isDark? " dark" : ""}`}>
                 <Navbar isDark = {isDark} setIsDark = {setIsDark} />
-                <Form className = "form" isDark = {isDark}/>
+                <main className="main-grid">
+                    <Form className = "form" isDark = {isDark}/>
+                </main>
+
             </div>
     )
 }

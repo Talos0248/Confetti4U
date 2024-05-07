@@ -17,6 +17,8 @@ export default function FormField({
                                       toggleSwitch, // A boolean indicating whether a toggle should be shown
                                       toggleChecked, // A boolean indicating whether the toggle is checked
                                       toggleHandler, // Function to handle toggle switch action
+    toggleLabel, // Label for the toggle switch
+    required// Default value for required
                                   }) {
     const id = React.useId();
 
@@ -32,6 +34,7 @@ export default function FormField({
                 id={`${id}-${name}`}
                 className="text-input"
                 placeholder={placeholder}
+                required={required}
             />;
             break;
         case 'dropdown':
@@ -67,7 +70,8 @@ export default function FormField({
             <img src={actionButtonImage} alt={actionButtonImageAlt} className="action-button-image"/>
         </button>
     ) : toggleSwitch ? (
-        <label>
+        <label className="toggle-label">
+            {toggleLabel}
             <Switch onChange={toggleHandler} checked={toggleChecked} onColor={"#42ccaa"} offColor={"#FF6F61"}
                     height={15} width={30} handleDiameter={17}/>
         </label>

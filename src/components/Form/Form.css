@@ -1,10 +1,10 @@
 .form {
     background-color: #f6f6f6;
-    width: 30%;
-    margin: auto;
-    margin-top: 10px;
+    width: 100%;
+    max-width: 48em;
     padding: 2em;
     border-radius: 1.5em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 }
 
 .form {
@@ -50,7 +50,17 @@
     filter: brightness(0.8);
 }
 
+.confettify:disabled {
+    background: #c0c0c0;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
 .dark .confettify {
     background: #363A3E;
     border: 3px solid #8d8d8d;
+}
+
+.hidden {
+    display: none;
 }

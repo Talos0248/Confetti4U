@@ -10,9 +10,11 @@ export const darkHeartColors = ["#FAB1A0", "#FFB6C1", "#FFD1DC", "#D7BDE2", "#E8
 export const lightStarColors = ["#FF6347", "#FF69B4", "#FFA500", "#FFC0CB", "#FF8C00", "#FF4500", "#FF1493", "#FF00FF", "#E6B0AA", "#D7BDE2"];
 export const darkStarColors = ["#FFD700", "#F9A602", "#FFA500", "#FF8C00", "#FFD740", "#FFC400", "#FFAB00", "#FFEA00", "#FFEE58", "#FFF176"];
 
+export const lightFireflyColors = ["#84B1ED", "#9AD3DE", "#F8C471", "#C1E0F7", "#B5EAD7", "#ECC8AF", "#7B68EE", "#C7CEEA", "#FF9AA2", "#AAFFA9"];
+export const darkFireflyColors = ["#F4D03F", "#F7DC6F", "#F9E79F", "#FAD7A0", "#FDEBD0", "#F8C471", "#F5B041", "#F39C12", "#E67E22", "#D35400"];
 
 
-export function colorStrings(str, isDark = "true") {
+export function colorStrings(str, isDark = true) {
     const colors = isDark ? darkColors : lightColors;
     return str.split("").map((letter, index) => (
         <span key={index} style={{ color: colors[index % colors.length] }}>
