@@ -12,7 +12,7 @@ export default function Navbar(props) {
         <nav className="navbar">
             <div className="content">
                 <div className="logo-and-description">
-                    <h2>{colorStrings("Confetti4U", props.isDark)}</h2>
+                    <h2>{colorStrings("Confetti4U", "regular", props.isDark)}</h2>
                     <div className="description">
                         <h3>•</h3>
                         <h3>Confetti for Every Occasion</h3>

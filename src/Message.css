@@ -1,0 +1,37 @@
+.message-background {
+    background: #eeeeee;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dark.message-background {
+    background: #272727;
+}
+
+.main-message {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.simple-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.simple-nav {
+
+}
+
+.simple-nav .icon {
+    margin-left: auto;
+}

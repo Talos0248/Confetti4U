@@ -3,6 +3,8 @@ import FormField from "../FormField/FormField.jsx";
 import {colorStrings} from "../../utils/colorStrings.jsx";
 import {RegularConfetti, SnowConfetti, HeartConfetti, StarConfetti, FireflyConfetti} from "../Confetti/Confetti.jsx";
 import {submitToFirebase} from "../../../firebase.js";
+import Lottie from "lottie-react";
+import successAnimation from "../../../public/lottie/success.json";
 
 import "./Form.css";
 
@@ -23,14 +25,26 @@ export default function Form({isDark}) {
 
     const [playSound, setPlaySound] = React.useState(false)
     const [playConfetti, setPlayConfetti] = React.useState(false)
+    const [currentAudio, setCurrentAudio] = React.useState(null);
 
     function togglePlayConfetti() {
         setPlayConfetti(!playConfetti)
     }
 
     function playSoundEffect(sfx) {
+        if (currentAudio && currentAudio.src.endsWith(`${sfx}.mp3`) && !currentAudio.paused) {
+            currentAudio.pause();
+            return;
+        }
+
+        if (currentAudio) {
+            currentAudio.pause()
+            currentAudio.currentTime = 0
+        }
+
         setPlaySound(!playSound)
         const audio = new Audio(`sfx/${sfx}.mp3`)
+        setCurrentAudio(audio)
         audio.play()
     }
 
@@ -47,8 +61,9 @@ export default function Form({isDark}) {
 
     const [isSending, setIsSending] = React.useState(false);
 
-    let messageID
+    const [messageID, setMessageID] = React.useState("");
     const [sentSuccess, setSentSuccess] = React.useState(false)
+    const successAnimationRef = React.useRef();
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -56,10 +71,10 @@ export default function Form({isDark}) {
         const docId = await submitToFirebase(formData);
         if (docId) {
             // Update your UI here to show success
-            alert(`Message sent successfully with ID: ${docId}`);
-            messageID = docId;
+            setMessageID(docId);
             setIsSending(false);
             setSentSuccess(true);
+            successAnimationRef.current.play();
         } else {
             // Update your UI here to show error
             alert("Failed to send message.");
@@ -87,7 +102,7 @@ export default function Form({isDark}) {
                            value={formData.confettiType}
                            options={[
                                {value: "", label: "None"},
-                               {value: "confetti", label: "Confetti"},
+                               {value: "regular", label: "Confetti"},
                                {value: "hearts", label: "Hearts"},
                                {value: "stars", label: "Stars"},
                                {value: "snowflakes", label: "Snowflakes"},
@@ -117,11 +132,11 @@ export default function Form({isDark}) {
                                {value: "merry-christmas", label: "Merry Christmas"},
                            ]}/>
                 <button type="submit" className="confettify" disabled={isSending} onSubmit={handleSubmit}>
-                    <span className="confettify-text">{isDark ? colorStrings(buttonText, isDark) : buttonText}</span>
+                    <span className="confettify-text">{isDark ? colorStrings(buttonText, "regular",isDark) : buttonText}</span>
                 </button>
 
                 {/*Normal Confetti*/}
-                {playConfetti && formData.confettiType === "confetti" && <RegularConfetti isDark={isDark}/>}
+                {playConfetti && formData.confettiType === "regular" && <RegularConfetti isDark={isDark}/>}
 
                 {/*Snow Confetti*/}
                 {playConfetti && formData.confettiType === "snowflakes" && <SnowConfetti isDark={isDark}/>}
@@ -136,6 +151,12 @@ export default function Form({isDark}) {
                 {playConfetti && formData.confettiType === "fireflies" && <FireflyConfetti isDark={isDark}/>}
 
             </form>
+            <div className={`success-message${sentSuccess ? "" : " hidden"}`}>
+                <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false} style={{ width: '300px', height: '300px', margin: 'auto'}} />
+                <h2 className="success-title">Message Sent!</h2>
+                <p className = "success-description">Find your message at:</p>
+                <a className="success-link" href={`${window.location.href}message?id=${messageID}`}>{`${window.location.href}message?id=${messageID}`}</a>
+            </div>
         </div>
     )
 }

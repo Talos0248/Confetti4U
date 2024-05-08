@@ -1,4 +1,4 @@
-.background {
+.homepage-background {
     min-height: 100vh;
     background: linear-gradient(45deg, #FCE8D7, #F9D7D7, #F9D7E8, #F9D7FF, #D7D7E8, #D7E8FF, #D7F7FF, #D7FFE8, #D7FFD7, #FFF0C5);
     background-size: 1800% 1800%;
@@ -29,7 +29,7 @@
     100%{background-position:0% 82%}
 }
 
-.dark.background {
+.dark.homepage-background {
     background: #272727;
 }
 
@@ -37,8 +37,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
+    min-height: 90vh;
     max-width: 1920px;
-    margin: 0 auto;
+    margin: 20px auto;
+    justify-items: center;
 }
 
 .form {

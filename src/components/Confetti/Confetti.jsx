@@ -1,38 +1,28 @@
+import React from "react";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize"
-import {
-    darkColors,
-    lightColors,
-    darkSnowColors,
-    lightSnowColors,
-    darkHeartColors,
-    lightHeartColors,
-    darkStarColors,
-    lightStarColors,
-    lightFireflyColors,
-    darkFireflyColors
-} from "../../utils/colorStrings.jsx";
+import {colors} from "../../utils/colorStrings.jsx";
 import {randomInt} from "react-confetti/src/utils";
 import "./Confetti.css";
 
-export function CustomConfetti({
-                                   isDark,
-                                   darkColors,
-                                   lightColors,
-                                   drawShape,
-                                   gravity,
-                                   wind,
-                                   numberOfPieces,
-                                   recycle,
-                                   tweenDuration,
-                                   fromBottom,
-    initialVelocityY
-                               }) {
-    const colors = isDark ? darkColors : lightColors;
+function CustomConfetti({
+                            isDark,
+                            darkColors,
+                            lightColors,
+                            drawShape,
+                            gravity,
+                            wind,
+                            numberOfPieces,
+                            recycle,
+                            tweenDuration,
+                            fromBottom,
+                            initialVelocityY
+                        }) {
+    const colorsToUse = isDark ? darkColors : lightColors;
     const { width, height } = useWindowSize();
     return (
         <Confetti
-            colors={colors}
+            colors={colorsToUse}
             width={width}
             height={height}
             numberOfPieces={numberOfPieces}
@@ -47,16 +37,13 @@ export function CustomConfetti({
     )
 }
 
-export function RegularConfetti({isDark}) {
-    return <CustomConfetti isDark={isDark} darkColors={darkColors} lightColors={lightColors} gravity={0.05}
-                           numberOfPieces={100}/>
+function RegularConfetti({isDark}) {
+    return <CustomConfetti isDark={isDark} darkColors={colors.regular.dark} lightColors={colors.regular.light} gravity={0.05} numberOfPieces={100}/>
 }
 
-
-export function SnowConfetti({isDark}) {
+function SnowConfetti({isDark}) {
     const snowflakes = [];
 
-    // i is for snowflakeCount
     for (let i = 0; i < 12; i++) {
         snowflakes.push(
             <div key={i} className="snowflake">
@@ -68,73 +55,45 @@ export function SnowConfetti({isDark}) {
     return (
         <div className="snowflakes" aria-hidden="true">
             {snowflakes}
-            <CustomConfetti isDark={isDark} darkColors={darkSnowColors} lightColors={lightSnowColors} gravity={0.015}
-                            numberOfPieces={isDark ? 800 : 300} wind={0.002} drawShape={ctx => {
+            <CustomConfetti isDark={isDark} darkColors={colors.snow.dark} lightColors={colors.snow.light} gravity={0.015} numberOfPieces={isDark ? 800 : 300} wind={0.002} drawShape={ctx => {
                 const spikes = 6;
-                const radius = isDark ? 2 : 4; // Radius adjusted based on the theme
+                const radius = isDark ? 2 : 4;
                 const outerRadius = radius;
                 const innerRadius = radius / 2;
 
                 ctx.beginPath();
-                ctx.moveTo(0, 0 - outerRadius); // Start from the top of the outer radius
+                ctx.moveTo(0, 0 - outerRadius);
 
                 for (let i = 0; i < spikes; i++) {
                     ctx.lineTo(0, 0 - outerRadius);
-                    ctx.rotate(Math.PI / spikes); // Rotate to position for the inner radius
-                    ctx.lineTo(0, 0 - innerRadius); // Draw to inner radius
-                    ctx.rotate(Math.PI / spikes); // Rotate to position for the next outer radius
+                    ctx.rotate(Math.PI / spikes);
+                    ctx.lineTo(0, 0 - innerRadius);
+                    ctx.rotate(Math.PI / spikes);
                 }
 
-                ctx.closePath(); // Close the path to finish the shape
+                ctx.closePath();
                 ctx.fill();
             }}/>
         </div>
     );
 }
 
-// HEART CONFETTI
-export function HeartConfetti({isDark}) {
-    return <CustomConfetti isDark={isDark} darkColors={darkHeartColors} lightColors={lightHeartColors} drawShape={
-        ctx => {
-            const size = 13; // Default size of the hearts
-            ctx.beginPath();
-            const topCurveHeight = size * 0.3;
-            ctx.moveTo(0, topCurveHeight);
-            // Top left curve
-            ctx.bezierCurveTo(
-                0, 0,
-                -size / 2, 0,
-                -size / 2, topCurveHeight
-            );
+function HeartConfetti({isDark}) {
+    return <CustomConfetti isDark={isDark} darkColors={colors.hearts.dark} lightColors={colors.hearts.light} drawShape={ctx => {
+        const size = 13;
+        ctx.beginPath();
+        const topCurveHeight = size * 0.3;
+        ctx.moveTo(0, topCurveHeight);
 
-            // Bottom left curve
-            ctx.bezierCurveTo(
-                -size / 2, size * 0.75,
-                0, size * 0.75,
-                0, size
-            );
+        ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+        ctx.bezierCurveTo(-size / 2, size * 0.75, 0, size * 0.75, 0, size);
+        ctx.bezierCurveTo(0, size * 0.75, size / 2, size * 0.75, size / 2, topCurveHeight);
+        ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
 
-            // Bottom right curve
-            ctx.bezierCurveTo(
-                0, size * 0.75,
-                size / 2, size * 0.75,
-                size / 2, topCurveHeight
-            );
-
-            // Top right curve
-            ctx.bezierCurveTo(
-                size / 2, 0,
-                0, 0,
-                0, topCurveHeight
-            );
-
-            ctx.fill();
-        }
-    } gravity={0.03}
-    />
+        ctx.fill();
+    }} gravity={0.03} />
 }
 
-// STAR CONFETTI
 function drawStar(ctx) {
     const numPoints = this.numPoints || randomInt(4, 6)
     this.numPoints = numPoints
@@ -153,19 +112,23 @@ function drawStar(ctx) {
     ctx.closePath()
 }
 
-export function StarConfetti({isDark}) {
-    return <CustomConfetti isDark={isDark} darkColors={darkStarColors} lightColors={lightStarColors}
-                           drawShape={drawStar} gravity={0.01}/>
+function StarConfetti({isDark}) {
+    return <CustomConfetti isDark={isDark} darkColors={colors.stars.dark} lightColors={colors.stars.light} drawShape={drawStar} gravity={0.01}/>
 }
 
-export function FireflyConfetti({isDark}) {
-    return <CustomConfetti isDark={isDark} darkColors={darkFireflyColors} lightColors={lightFireflyColors} gravity={-0.01}
-                           numberOfPieces={400} fromBottom={true} initialVelocityY={2} tweenDuration={50000} drawShape={
-        (ctx) => {
-            ctx.beginPath();
-            ctx.arc(0, 0, isDark ? 2 : 3, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.closePath();
-        }
-    }/>
+function FireflyConfetti({isDark}) {
+    return <CustomConfetti isDark={isDark} darkColors={colors.fireflies.dark} lightColors={colors.fireflies.light} gravity={-0.01} numberOfPieces={400} fromBottom={true} initialVelocityY={2} tweenDuration={50000} drawShape={(ctx) => {
+        ctx.beginPath();
+        ctx.arc(0, 0, isDark ? 2 : 3, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }}/>
 }
+
+export {
+    RegularConfetti,
+    SnowConfetti,
+    HeartConfetti,
+    StarConfetti,
+    FireflyConfetti
+};

@@ -1,17 +1,17 @@
 import React from 'react'
-import './App.css'
+import './Homepage.css'
 import Navbar from "./components/Navbar/Navbar.jsx"
 import Form from "./components/Form/Form.jsx"
 
 
 
-function App() {
+function Homepage() {
     //initializes the state of the dark mode switch to match the user's system preferences
     const [isDark, setIsDark] = React.useState(window.matchMedia("(prefers-color-scheme: dark)").matches);
 
 
     return (
-            <div className={`background${+ isDark? " dark" : ""}`}>
+            <div className={`homepage-background${+ isDark? " dark" : ""}`}>
                 <Navbar isDark = {isDark} setIsDark = {setIsDark} />
                 <main className="main-grid">
                     <Form className = "form" isDark = {isDark}/>
@@ -21,4 +21,4 @@ function App() {
     )
 }
 
-export default App
+export default Homepage

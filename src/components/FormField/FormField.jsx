@@ -21,6 +21,10 @@ export default function FormField({
     required// Default value for required
                                   }) {
     const id = React.useId();
+    function actionButtonHandlerWithoutDefault(event) {
+        event.preventDefault();
+        actionButtonHandler();
+    }
 
     let inputElement;
 
@@ -66,7 +70,7 @@ export default function FormField({
     }
 
     const buttonElement = actionButtonImage ? (
-        <button onClick={actionButtonHandler} className="action-button">
+        <button onClick={actionButtonHandlerWithoutDefault} className="action-button">
             <img src={actionButtonImage} alt={actionButtonImageAlt} className="action-button-image"/>
         </button>
     ) : toggleSwitch ? (
