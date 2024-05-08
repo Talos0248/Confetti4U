@@ -156,7 +156,7 @@ export default function Form({isDark}) {
                 <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false} style={{ width: '300px', height: '300px', margin: 'auto'}} />
                 <h2 className="success-title">Message Sent!</h2>
                 <p className = "success-description">Find your message at:</p>
-                <a className="success-link" href={`${window.location.href}message?id=${messageID}`}>{`${window.location.href}message?id=${messageID}`}</a>
+                <a className="success-link" href={`${window.location.href}/#/message?id=${messageID}`}>{`${window.location.href}message?id=${messageID}`}</a>
             </div>
         </div>
     )
