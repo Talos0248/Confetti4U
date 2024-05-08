@@ -130,6 +130,7 @@ export default function Form({isDark}) {
                                {value: "", label: "None"},
                                {value: "happy-birthday", label: "Happy Birthday"},
                                {value: "merry-christmas", label: "Merry Christmas"},
+                               {value: "sentimental-music", label: "Sentimental Music"}
                            ]}/>
                 <button type="submit" className="confettify" disabled={isSending} onSubmit={handleSubmit}>
                     <span className="confettify-text">{isDark ? colorStrings(buttonText, "regular",isDark) : buttonText}</span>
