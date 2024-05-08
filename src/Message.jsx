@@ -67,7 +67,8 @@ function Message() {
     }
 
     React.useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
+        // const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
         const id = urlParams.get('id');
 
         const fetchMessage = async () => {
