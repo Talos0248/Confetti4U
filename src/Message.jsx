@@ -1,8 +1,8 @@
 import React from 'react';
 import './Message.css';
-import { fetchMessageById } from '../firebase.js';
-import { colorStrings } from './utils/colorStrings.jsx';
-import { Loader } from './components/Loader/Loader.jsx';
+import {fetchMessageById} from '../firebase.js';
+import {colorStrings} from './utils/colorStrings.jsx';
+import {Loader} from './components/Loader/Loader.jsx';
 import {
     RegularConfetti,
     SnowConfetti,
@@ -10,7 +10,7 @@ import {
     StarConfetti,
     FireflyConfetti
 } from './components/Confetti/Confetti.jsx';
-import { DarkModeSwitch } from 'react-toggle-dark-mode';
+import {DarkModeSwitch} from 'react-toggle-dark-mode';
 import Lottie from 'lottie-react';
 import openGiftAnimation from '../public/lottie/open-gift.json';
 
@@ -28,6 +28,26 @@ function Message() {
         setGiftOpened(true);
     }
 
+    function openGift() {
+        openGiftAnimationRef.current.play()
+        if (message.sfx) {
+            try {
+                const audio = new Audio(`sfx/${message.sfx}.mp3`);
+                audio.onended = () => {
+                    // Code to execute after the audio has finished playing
+                    if (message.music) {
+                        const music = new Audio(`sfx/${message.music}.mp3`);
+                        music.play();
+                    }
+                };
+                audio.play();
+            } catch (error) {
+                console.error('Error playing sound effect:', error);
+            }
+        }
+    }
+
+
     const [message, setMessage] = React.useState(null);
     const defaultMessage = {
         from: 'The Developer',
@@ -40,9 +60,9 @@ function Message() {
         music: ''
     };
 
-    function splitToParagraphs(text) {
+    function splitToParagraphs(text, className = '') {
         return text.split('\n').map((paragraph, index) => {
-            return <p key={index}>{paragraph}</p>;
+            return <p key={index} className={className} style={{ '--animation-delay': `${8 + index * 4}s` }}>{paragraph}</p>;
         });
     }
 
@@ -61,33 +81,51 @@ function Message() {
     return (
         <div className={`message-background${+isDark ? ' dark' : ''}`}>
             <nav className="simple-nav">
-                <DarkModeSwitch className="icon" size={36} sunColor="#ff9a61" checked={isDark} onChange={toggleDarkMode} />
+                <DarkModeSwitch className="icon" size={36} sunColor="#ff9a61" checked={isDark}
+                                onChange={toggleDarkMode}/>
             </nav>
             {!message ? (
-                <Loader />
+                <Loader/>
             ) : !giftOpened ? (
-                <Lottie animationData={openGiftAnimation} lottieRef={openGiftAnimationRef} autoplay={false} loop={false} onComplete={showMessage}/>
+                    <div className="gift-container">
+                        <Lottie className="gift-icon" animationData={openGiftAnimation} lottieRef={openGiftAnimationRef}
+                                autoplay={false}
+                                loop={false} onComplete={showMessage} style={{width: "min(50em, 100%)"}}
+                                onClick={openGift}/>
+                        <h2 className="gift-text">{colorStrings("Someone has a message for you!", "regular", isDark)}</h2>
+                        <p className="gift-description">Tap the Gift Box to Open!</p>
+                    </div>
                 )
                 : (
-                <div className="main-message">
-                    <div className="message">
-                        <h2>
-                            {colorStrings(
-                                message.mainText,
-                                message.confettiType ? message.confettiType : 'regular',
-                                isDark
-                            )}
-                        </h2>
-                        {splitToParagraphs(message.additionalText)}
+                    <div className="main-message">
+                        <div className="message">
+                            {message.to &&
+                                <p className="message-to">To: <span className="message-receipent">{message.to}</span>
+                                </p>}
+                            <h2 className="message-title">
+                                {colorStrings(
+                                    message.mainText,
+                                    message.confettiType ? message.confettiType : 'regular',
+                                    isDark
+                                )}
+                            </h2>
+                            {splitToParagraphs(message.additionalText, 'message-text')}
+                            {message.from &&
+                                <p className="message-from">From: <span className="message-sender">{message.from}</span>
+                                </p>}
+                        </div>
+                        <div>
+                            <div className="message-homepage-redirect-container">
+                                <a className="message-homepage-redirect" href={`${window.location.origin}`}>Make your own message!</a>
+                            </div>
+                        </div>
+                        {message.confettiType === 'regular' && <RegularConfetti isDark={isDark}/>}
+                        {message.confettiType === 'snow' && <SnowConfetti isDark={isDark}/>}
+                        {message.confettiType === 'hearts' && <HeartConfetti isDark={isDark}/>}
+                        {message.confettiType === 'stars' && <StarConfetti isDark={isDark}/>}
+                        {message.confettiType === 'fireflies' && <FireflyConfetti isDark={isDark}/>}
                     </div>
-
-                    {message.confettiType === 'regular' && <RegularConfetti isDark={isDark} />}
-                    {message.confettiType === 'snow' && <SnowConfetti isDark={isDark} />}
-                    {message.confettiType === 'heart' && <HeartConfetti isDark={isDark} />}
-                    {message.confettiType === 'star' && <StarConfetti isDark={isDark} />}
-                    {message.confettiType === 'firefly' && <FireflyConfetti isDark={isDark} />}
-                </div>
-            )}
+                )}
         </div>
     );
 }
