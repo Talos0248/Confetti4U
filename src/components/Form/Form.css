@@ -1,10 +1,9 @@
 .form {
     background-color: #f6f6f6;
-    width: 100%;
-    max-width: 48em;
     padding: 2em;
     border-radius: 1.5em;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    margin: auto;
 }
 
 .form {
@@ -63,4 +62,20 @@
 
 .hidden {
     display: none;
+}
+
+.success-message {
+    padding: 1em;
+    text-align: center;
+}
+
+.success-link {
+    color: #38af92;
+    display: block;
+    margin: 1em auto;
+    text-decoration: none;
+}
+
+.dark .success-message {
+    color: #eeeeee;
 }

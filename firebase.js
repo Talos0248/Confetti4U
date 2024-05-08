@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc , doc, getDoc} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,5 +30,24 @@ export const submitToFirebase = async (formData) => {
     } catch (e) {
         console.error("Error adding document: ", e);
         return null; // Handle the error appropriately
+    }
+};
+
+// Function to fetch data from Firebase using the ID
+export const fetchMessageById = async (collectionName, id) => {
+    try {
+        const docRef = doc(db, collectionName, id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log('Document data:', docSnap.data());
+            return docSnap.data();
+        } else {
+            console.log('No such document!');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching message:', error);
+        return null;
     }
 };

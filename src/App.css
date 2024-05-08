@@ -37,8 +37,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
+    min-height: 90vh;
     max-width: 1920px;
-    margin: 0 auto;
+    margin: 20px auto;
+    justify-items: center;
 }
 
 .form {
