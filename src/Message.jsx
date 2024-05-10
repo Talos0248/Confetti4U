@@ -62,7 +62,8 @@ function Message() {
 
     function splitToParagraphs(text, className = '') {
         return text.split('\n').map((paragraph, index) => {
-            return <p key={index} className={className} style={{ '--animation-delay': `${8 + index * 4}s` }}>{paragraph}</p>;
+            return <p key={index} className={className}
+                      style={{'--animation-delay': `${8 + index * 4}s`}}>{paragraph}</p>;
         });
     }
 
@@ -117,11 +118,13 @@ function Message() {
                         </div>
                         <div>
                             <div className="message-homepage-redirect-container">
-                                <a className="message-homepage-redirect" href={`${window.location.origin}`}>Make your own message!</a>
+                                <a className="message-homepage-redirect" href={`${window.location.origin}/Confetti4U/`}>Make
+                                    your own message! <img src={isDark ? "img/rocket-dark.svg" : "img/rocket-light.svg"}
+                                                           alt="Go!" className="rocket-icon"/></a>
                             </div>
                         </div>
                         {message.confettiType === 'regular' && <RegularConfetti isDark={isDark}/>}
-                        {message.confettiType === 'snow' && <SnowConfetti isDark={isDark}/>}
+                        {message.confettiType === 'snowflakes' && <SnowConfetti isDark={isDark}/>}
                         {message.confettiType === 'hearts' && <HeartConfetti isDark={isDark}/>}
                         {message.confettiType === 'stars' && <StarConfetti isDark={isDark}/>}
                         {message.confettiType === 'fireflies' && <FireflyConfetti isDark={isDark}/>}

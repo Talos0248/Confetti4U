@@ -153,7 +153,7 @@ export default function Form({isDark}) {
 
             </form>
             <div className={`success-message${sentSuccess ? "" : " hidden"}`}>
-                <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false} style={{ width: '300px', height: '300px', margin: 'auto'}} />
+                <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false} style={{ width: 'min(300px,90%)' , height: 'min(300px,30%)', margin: 'auto'}} />
                 <h2 className="success-title">Message Sent!</h2>
                 <p className = "success-description">Find your message at:</p>
                 <a className="success-link" href={`${window.location.href}/#/message?id=${messageID}`}>{`${window.location.href}message?id=${messageID}`}</a>

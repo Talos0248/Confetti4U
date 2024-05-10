@@ -8,31 +8,25 @@
     background-size: 1800% 1800%;
 
     -webkit-animation: rainbow 90s ease infinite;
-    -z-animation: rainbow 90s ease infinite;
     -o-animation: rainbow 90s ease infinite;
     animation: rainbow 90s ease infinite;}
 
 @-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0%, 100% {background-position: 0 82%;}
+    50% {background-position: 100% 19%;}
 }
 @-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0%, 100% {background-position: 0 82%;}
+    50% {background-position: 100% 19%;}
 }
 @-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0%, 100% {background-position: 0 82%;}
+    50% {background-position: 100% 19%;}
 }
 @keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0%, 100% {background-position: 0 82%;}
+    50% {background-position: 100% 19%;}
 }
-
 
 .dark.message-background {
     background: #272727;
@@ -201,8 +195,42 @@
     font-size: 0.8em;
     text-decoration: none;
     color: #363A3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dark .message-homepage-redirect {
     color: rgba(255, 255, 255, 0.65);
+}
+
+.rocket-icon {
+    width: 2em;
+    margin-left: 0.5em;
+}
+
+@media screen and (max-width: 400px) {
+    .gift-text {
+        font-size: 1.2em;
+    }
+
+    .message-title {
+        font-size: 1.5em;
+    }
+
+    .message-text {
+        font-size: 0.8em;
+    }
+
+    .message-to, .message-from{
+        font-size: 0.8em;
+    }
+
+    .message-homepage-redirect {
+        font-size: 0.6em;
+    }
+
+    .rocket-icon {
+        width: 1.5em;
+    }
 }

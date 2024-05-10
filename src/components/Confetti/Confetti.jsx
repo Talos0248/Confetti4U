@@ -55,7 +55,7 @@ function SnowConfetti({isDark}) {
     return (
         <div className="snowflakes" aria-hidden="true">
             {snowflakes}
-            <CustomConfetti isDark={isDark} darkColors={colors.snow.dark} lightColors={colors.snow.light}
+            <CustomConfetti isDark={isDark} darkColors={colors.snowflakes.dark} lightColors={colors.snowflakes.light}
                             gravity={0.015} confettiToWidthRatio={isDark ? 0.8 : 0.3} wind={0.002} drawShape={ctx => {
                 const spikes = 6;
                 const radius = isDark ? 2 : 4;

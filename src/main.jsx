@@ -20,14 +20,14 @@
 //       <RouterProvider router={router} />
 //   </React.StrictMode>,
 // )
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; // Import createRoot
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Homepage from './Homepage.jsx';
 import Message from './Message.jsx';
 import './index.css';
 
+// Create your router
 const router = createHashRouter([
     {
         path: '/',
@@ -39,9 +39,14 @@ const router = createHashRouter([
     }
 ]);
 
-ReactDOM.render(
+// Find the root element
+const rootElement = document.getElementById('root');
+// Create a root
+const root = createRoot(rootElement);
+
+// Render the application
+root.render(
     <React.StrictMode>
         <RouterProvider router={router} />
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );

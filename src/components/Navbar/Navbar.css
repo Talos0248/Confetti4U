@@ -5,12 +5,12 @@ ul {
 }
 
 .navbar {
-    width: 100vw;
+    width: 100%;
     background-color: #f6f6f6;
     color: #363A3E;
 }
 
-.content {
+.navbar-content {
     margin: auto;
     max-width: 1920px;
     display: flex;
@@ -44,5 +44,19 @@ ul {
 @media screen and (max-width: 600px) {
     .description {
         display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar-content {
+        padding: 0 1em;
+    }
+
+    .logo {
+        font-size: 1.2em;
+    }
+
+    .navbar .icon {
+        width: 1.2em;
     }
 }

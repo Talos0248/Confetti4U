@@ -1,13 +1,9 @@
 .form {
     background-color: #f6f6f6;
-    padding: 2em;
+    padding: 1em 2em;
     border-radius: 1.5em;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
     margin: auto;
-}
-
-.form {
-    padding: 1em 2em;
 }
 
 .form-field {
@@ -78,4 +74,33 @@
 
 .dark .success-message {
     color: #eeeeee;
+}
+
+@media screen and (max-width: 720px){
+    .success-link {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .form {
+        padding: 1em;
+    }
+
+    .confettify {
+        padding: 0.2em 0.4em;
+    }
+
+    .confettify-text {
+        font-size: 0.8em;
+    }
+
+    .success-message {
+        font-size: 0.7em;
+    }
+
+    .success-link {
+        font-size: 0.6em;
+    }
+
 }

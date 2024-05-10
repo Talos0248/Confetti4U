@@ -10,9 +10,9 @@ export default function Navbar(props) {
 
     return (
         <nav className="navbar">
-            <div className="content">
+            <div className="navbar-content">
                 <div className="logo-and-description">
-                    <h2>{colorStrings("Confetti4U", "regular", props.isDark)}</h2>
+                    <h2 className="logo">{colorStrings("Confetti4U", "regular", props.isDark)}</h2>
                     <div className="description">
                         <h3>•</h3>
                         <h3>Confetti for Every Occasion</h3>
