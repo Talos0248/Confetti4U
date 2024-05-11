@@ -3,6 +3,7 @@ import FormField from "../FormField/FormField.jsx";
 import {colorStrings} from "../../utils/colorStrings.jsx";
 import {RegularConfetti, SnowConfetti, HeartConfetti, StarConfetti, FireflyConfetti} from "../Confetti/Confetti.jsx";
 import {submitToFirebase} from "../../../firebase.js";
+import {CopyLinkButton} from "../CopyLinkButton/CopyLinkButton.jsx";
 import Lottie from "lottie-react";
 import successAnimation from "../../../public/lottie/success.json";
 
@@ -26,6 +27,7 @@ export default function Form({isDark}) {
     const [playSound, setPlaySound] = React.useState(false)
     const [playConfetti, setPlayConfetti] = React.useState(false)
     const [currentAudio, setCurrentAudio] = React.useState(null);
+    const [myUrl, setMyUrl] = React.useState("");
 
     function togglePlayConfetti() {
         setPlayConfetti(!playConfetti)
@@ -61,7 +63,6 @@ export default function Form({isDark}) {
 
     const [isSending, setIsSending] = React.useState(false);
 
-    const [messageID, setMessageID] = React.useState("");
     const [sentSuccess, setSentSuccess] = React.useState(false)
     const successAnimationRef = React.useRef();
 
@@ -71,10 +72,10 @@ export default function Form({isDark}) {
         const docId = await submitToFirebase(formData);
         if (docId) {
             // Update your UI here to show success
-            setMessageID(docId);
             setIsSending(false);
             setSentSuccess(true);
             successAnimationRef.current.play();
+            setMyUrl(`${window.location.href}/#/message?id=${docId}`)
         } else {
             // Update your UI here to show error
             alert("Failed to send message.");
@@ -83,6 +84,7 @@ export default function Form({isDark}) {
     };
 
     const buttonText = isSending ? "Sending..." : "Confettify!";
+
 
     return (
         <div className="form">
@@ -117,23 +119,26 @@ export default function Form({isDark}) {
                            actionButtonImageAlt="Play Sound"
                            actionButtonHandler={() => playSoundEffect(formData.sfx)}
                            options={[
-                               {value: "None", label: "None"},
+                               {value: "", label: "None"},
                                {value: "kids-cheering", label: "Kids Cheering"},
                                {value: "item-get", label: "Item Get!"},
+                               {value: "medieval-fanfare", label: "Medieval Fanfare"},
                            ]}/>
                 <FormField name="music" label="Music:" type="dropdown" handleChange={handleChange}
                            value={formData.music}
                            actionButtonImage={isDark ? "img/sound-dark.png" : "img/sound-light.png"}
-                            actionButtonImageAlt="Play Sound"
-                            actionButtonHandler={() => playSoundEffect(formData.music)}
+                           actionButtonImageAlt="Play Sound"
+                           actionButtonHandler={() => playSoundEffect(formData.music)}
                            options={[
                                {value: "", label: "None"},
                                {value: "happy-birthday", label: "Happy Birthday"},
                                {value: "merry-christmas", label: "Merry Christmas"},
-                               {value: "sentimental-music", label: "Sentimental Music"}
+                               {value: "sentimental-music", label: "Sentimental Music"},
+                               {value: "mii-theme", label: "Mii Theme"}
                            ]}/>
                 <button type="submit" className="confettify" disabled={isSending} onSubmit={handleSubmit}>
-                    <span className="confettify-text">{isDark ? colorStrings(buttonText, "regular",isDark) : buttonText}</span>
+                    <span
+                        className="confettify-text">{isDark ? colorStrings(buttonText, "regular", isDark) : buttonText}</span>
                 </button>
 
                 {/*Normal Confetti*/}
@@ -153,10 +158,15 @@ export default function Form({isDark}) {
 
             </form>
             <div className={`success-message${sentSuccess ? "" : " hidden"}`}>
-                <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false} style={{ width: 'min(300px,90%)' , height: 'min(300px,30%)', margin: 'auto'}} />
+                <Lottie animationData={successAnimation} lottieRef={successAnimationRef} autoplay={false} loop={false}
+                        style={{width: 'min(300px,90%)', height: 'min(300px,30%)', margin: 'auto'}}/>
                 <h2 className="success-title">Message Sent!</h2>
-                <p className = "success-description">Find your message at:</p>
-                <a className="success-link" href={`${window.location.href}/#/message?id=${messageID}`}>{`${window.location.href}message?id=${messageID}`}</a>
+                <p className="success-description">Find your message at:</p>
+                <a className="success-link" href={myUrl}>{myUrl}</a>
+                <div className="success-buttons-container">
+                    <CopyLinkButton className="copy-button" myUrl={myUrl}/>
+                    <button className="resend-button" onClick={() => window.location.reload()}>Send Another</button>
+                </div>
             </div>
         </div>
     )
