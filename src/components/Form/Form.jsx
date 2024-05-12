@@ -123,6 +123,7 @@ export default function Form({isDark}) {
                                {value: "kids-cheering", label: "Kids Cheering"},
                                {value: "item-get", label: "Item Get!"},
                                {value: "medieval-fanfare", label: "Medieval Fanfare"},
+                               {value: "clair-de-lune", label: "Clair de Lune"},
                            ]}/>
                 <FormField name="music" label="Music:" type="dropdown" handleChange={handleChange}
                            value={formData.music}
