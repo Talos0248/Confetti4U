@@ -123,7 +123,6 @@ export default function Form({isDark}) {
                                {value: "kids-cheering", label: "Kids Cheering"},
                                {value: "item-get", label: "Item Get!"},
                                {value: "medieval-fanfare", label: "Medieval Fanfare"},
-                               {value: "clair-de-lune", label: "Clair de Lune"},
                            ]}/>
                 <FormField name="music" label="Music:" type="dropdown" handleChange={handleChange}
                            value={formData.music}
@@ -135,7 +134,8 @@ export default function Form({isDark}) {
                                {value: "happy-birthday", label: "Happy Birthday"},
                                {value: "merry-christmas", label: "Merry Christmas"},
                                {value: "sentimental-music", label: "Sentimental Music"},
-                               {value: "mii-theme", label: "Mii Theme"}
+                               {value: "mii-theme", label: "Mii Theme"},
+                               {value: "clair-de-lune", label: "Clair de Lune"}
                            ]}/>
                 <button type="submit" className="confettify" disabled={isSending} onSubmit={handleSubmit}>
                     <span
